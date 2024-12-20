@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  etl_service:
+    build: .
+    container_name: currency_etl
+    environment:
+      - CURRENCYBEACON_API_KEY=${CURRENCYBEACON_API_KEY}
+    volumes:
+      - ./data:/app/data
+    command: ["python", "main.py"]
