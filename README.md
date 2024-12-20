@@ -137,7 +137,7 @@ docker compose up --build
 ```
 4. Subsequent runs
 ```bash
-docker run --env-file <path_to_project_root>/.env currencybeacon_etl_service-etl_service
+docker start -ai currency_etl
 ```
 
 
@@ -146,3 +146,17 @@ docker run --env-file <path_to_project_root>/.env currencybeacon_etl_service-etl
 1. Install duckdb client (https://duckdb.org/docs/installation/?version=stable&environment=cli&platform=win&download_method=package_manager&architecture=x86_64)
 2. Use any preferred IDE (i used VScode from sql fail to shell (see here: https://youtu.be/ZX5FdqzGT1E?si=6wYK2pZmN_Xfh8eV&t=59))
 3. some example queries are given in queries.sql
+
+
+
+## Running on a Schedule (Cron Job)
+You can automate the pipeline to run daily at desired time using a cron job:
+1. Open the crontab editor:
+```bash
+crontab -e
+```
+2. Add the following line to schedule the job (in my case everyday starting at 12 pm):
+```bash
+0 12 * * * nohup docker start -ai currency_etl
+
+```
